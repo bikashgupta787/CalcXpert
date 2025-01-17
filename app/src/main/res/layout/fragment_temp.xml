@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.TempFragment">
+
+    <include
+        android:id="@+id/bottom"
+        layout="@layout/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/deg_unit_1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Celsius"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/bottom" />-->
+
+    <Spinner
+        android:id="@+id/degUnit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:entries="@array/degree_types"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom" />
+
+    <TextView
+        android:id="@+id/celciusTv"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:hint=""
+        android:maxLength="8"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom" />
+
+    <Spinner
+        android:id="@+id/degUnit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:entries="@array/degree_types"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/degUnit1" />
+
+    <TextView
+        android:id="@+id/farhTv"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:hint=""
+        android:gravity="center"
+        android:maxLength="8"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/celciusTv" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TableRow>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_7"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="7" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_8"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="8" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_9"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="9" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_croxx"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="AC"
+                android:textColor="@color/green" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_4"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="4" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_5"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="5" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_6"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="6" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_clear"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="C"
+                android:textColor="@color/green" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_1"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="1" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_2"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="2" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_3"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="3" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_addition"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="+/-"
+                android:textColor="@color/green" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_white"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_0"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="0" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_dot"
+                style="@style/Button_Style"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="." />
+
+
+        </TableRow>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

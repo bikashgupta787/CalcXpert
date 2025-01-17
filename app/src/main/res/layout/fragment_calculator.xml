@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/window_background"
-    tools:context=".CalculatorFragment">
+    tools:context=".fragments.CalculatorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -2,12 +2,41 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/calculatorFragment">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/calculator_screen">
 
     <fragment
-        android:id="@+id/calculatorFragment"
-        android:name="com.example.multicalculator.CalculatorFragment"
+        android:id="@+id/calculator_screen"
+        android:name="com.example.multicalculator.fragments.CalculatorFragment"
         android:label="fragment_calculator"
-        tools:layout="@layout/fragment_calculator" />
+        tools:layout="@layout/fragment_calculator" >
+        <action
+            android:id="@+id/action_calculator_screen_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/home_screen"
+        android:name="com.example.multicalculator.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_screen_to_calculator_screen"
+            app:destination="@id/calculator_screen" />
+        <action
+            android:id="@+id/action_home_screen_to_ageFragment"
+            app:destination="@id/ageFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_tempFragment"
+            app:destination="@id/tempFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ageFragment"
+        android:name="com.example.multicalculator.fragments.AgeFragment"
+        android:label="fragment_age"
+        tools:layout="@layout/fragment_age" />
+    <fragment
+        android:id="@+id/tempFragment"
+        android:name="com.example.multicalculator.fragments.TempFragment"
+        android:label="fragment_temp"
+        tools:layout="@layout/fragment_temp" />
 </navigation>
