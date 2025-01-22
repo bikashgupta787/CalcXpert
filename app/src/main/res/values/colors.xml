@@ -13,4 +13,11 @@
     <color name="green">#4ea043</color>
     <color name="red">#d14f4f</color>
     <color name="text_main">#FF000000</color>
+
+
+    <color name="grey">#C8C8C8</color>
+    <color name="blue_2">#5E48BD</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="red_light">#F8C4C4</color>
+    <color name="light_grey">#ECECEC</color>
 </resources>
