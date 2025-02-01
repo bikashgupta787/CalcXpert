@@ -5,7 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/calculator_screen">
 
-    <fragment
+     <fragment
         android:id="@+id/calculator_screen"
         android:name="com.example.multicalculator.fragments.CalculatorFragment"
         android:label="fragment_calculator"
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_calculator_screen_to_home_screen"
             app:destination="@id/home_screen" />
+        <action
+            android:id="@+id/action_calculator_screen_to_currencyFragment"
+            app:destination="@id/currency_screen" />
     </fragment>
     <fragment
         android:id="@+id/home_screen"
@@ -28,15 +31,47 @@
         <action
             android:id="@+id/action_home_screen_to_tempFragment"
             app:destination="@id/tempFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_dataFragment"
+            app:destination="@id/dataFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_currencyFragment"
+            app:destination="@id/currency_screen" />
     </fragment>
     <fragment
         android:id="@+id/ageFragment"
         android:name="com.example.multicalculator.fragments.AgeFragment"
         android:label="fragment_age"
-        tools:layout="@layout/fragment_age" />
+        tools:layout="@layout/fragment_age" >
+        <action
+            android:id="@+id/action_ageFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
     <fragment
         android:id="@+id/tempFragment"
         android:name="com.example.multicalculator.fragments.TempFragment"
         android:label="fragment_temp"
-        tools:layout="@layout/fragment_temp" />
+        tools:layout="@layout/fragment_temp" >
+        <action
+            android:id="@+id/action_tempFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataFragment"
+        android:name="com.example.multicalculator.fragments.DataFragment"
+        android:label="fragment_data"
+        tools:layout="@layout/fragment_data" >
+        <action
+            android:id="@+id/action_dataFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/currency_screen"
+        android:name="com.example.multicalculator.fragments.CurrencyFragment"
+        android:label="fragment_currency"
+        tools:layout="@layout/fragment_currency" >
+        <action
+            android:id="@+id/action_currency_screen_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
 </navigation>

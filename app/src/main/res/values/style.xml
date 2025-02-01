@@ -26,4 +26,5 @@
     <style name="CustomDatePicker" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="colorAccent">@color/red</item> <!-- Color for the OK and Cancel buttons -->
     </style>
+
 </resources>

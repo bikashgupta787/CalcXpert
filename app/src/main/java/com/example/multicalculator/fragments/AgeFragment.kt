@@ -10,14 +10,18 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.databinding.FragmentAgeBinding
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.Instant
 import java.time.LocalDate
 import java.time.Period
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
@@ -54,6 +58,7 @@ class AgeFragment : Fragment() {
                 binding.dobText.text = formatDate(date)
                 calculateAge()
                 calculateNextBirthday()
+                  calculateTotalAge()
             }
         }
 
@@ -65,13 +70,14 @@ class AgeFragment : Fragment() {
                 binding.currentDate.text = formatDate(date)
                 calculateAge()
                 calculateNextBirthday()
+                calculateTotalAge()
             }
         }
 
-
-        binding.buttonAge.setOnClickListener {
-            calculateAge()
+        binding.bottom.backBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_ageFragment_to_home_screen)
         }
+
 
         return binding.root
     }
@@ -82,7 +88,7 @@ class AgeFragment : Fragment() {
         // Check if a date is already selected, and if so, set it as the initial date
         val initialDate = dob ?: currentDate
         val initialCalendar = if (initialDate != null) {
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
             try {
                 val date = sdf.parse(initialDate.toString())
                 val calendarInstance = Calendar.getInstance()
@@ -135,7 +141,7 @@ class AgeFragment : Fragment() {
         if (dob != null) {
             val todayText = binding.currentDate.text.toString()
             val today = try {
-                LocalDate.parse(todayText, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                LocalDate.parse(todayText, DateTimeFormatter.ofPattern("dd MMM yyyy"))
             } catch (e: Exception) {
                 LocalDate.now() // Fallback to the current date if parsing fails
             }
@@ -160,17 +166,42 @@ class AgeFragment : Fragment() {
 
     }
 
+    private fun calculateTotalAge(){
+        if (dob == null || currentDate == null) return
+
+        val years = ChronoUnit.YEARS.between(dob, currentDate)
+        val months = ChronoUnit.MONTHS.between(dob, currentDate)
+        val weeks = ChronoUnit.WEEKS.between(dob, currentDate)
+        val days = ChronoUnit.DAYS.between(dob, currentDate)
+
+        val dobDateTime = dob!!.atStartOfDay()
+        val currentDateTime = currentDate!!.atStartOfDay()
+
+        val hours = ChronoUnit.HOURS.between(dobDateTime, currentDateTime)
+        val minutes = ChronoUnit.MINUTES.between(dobDateTime, currentDateTime)
+
+        binding.totalYears.text = years.toString()
+        binding.totalMonths.text = months.toString()
+        binding.totalWeeks.text = weeks.toString()
+        binding.totalDays.text = days.toString()
+        binding.totalHours.text = hours.toString()
+        binding.totalMinutes.text = minutes.toString()
+    }
+
     private fun formatDate(date: LocalDate): String {
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
         return date.format(formatter)
     }
 
     private fun highlightSelectedTextView() {
-        binding.dobText.setBackgroundColor(
-            if (selectedTextView == binding.dobText) Color.YELLOW else Color.WHITE
+        val selectedColor = ContextCompat.getColor(requireContext(),R.color.purple_200)
+        val otherText = ContextCompat.getColor(requireContext(), R.color.black)
+
+        binding.dobText.setTextColor(
+            if (selectedTextView == binding.dobText) selectedColor else otherText
         )
-        binding.currentDate.setBackgroundColor(
-            if (selectedTextView == binding.currentDate) Color.YELLOW else Color.WHITE
+        binding.currentDate.setTextColor(
+            if (selectedTextView == binding.currentDate) selectedColor else otherText
         )
     }
 }

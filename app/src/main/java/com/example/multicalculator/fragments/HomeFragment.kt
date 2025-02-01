@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.replace
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.databinding.FragmentCalculatorBinding
@@ -29,8 +31,14 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_home_screen_to_tempFragment)
         }
 
+        binding.dataLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_dataFragment)
+        }
+
         return binding.root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,6 +1,5 @@
 package com.example.multicalculator.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +9,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.databinding.FragmentTempBinding
 
@@ -20,8 +21,8 @@ class TempFragment : Fragment() {
 
     private lateinit var selectedTextView: TextView
 
-    private lateinit var celsiusTv: TextView
-    private lateinit var farhnTv: TextView
+    private lateinit var tempType1: TextView
+    private lateinit var tempType2: TextView
     private lateinit var spinnerFrom: Spinner
     private lateinit var spinnerTo: Spinner
     override fun onCreateView(
@@ -31,8 +32,8 @@ class TempFragment : Fragment() {
         _binding = FragmentTempBinding.inflate(inflater, container, false)
         binding.bottom.fragmentHeading.text = "Temperature"
 
-        celsiusTv = binding.celciusTv
-        farhnTv = binding.farhTv
+        tempType1 = binding.celciusTv
+        tempType2 = binding.farhTv
 
         spinnerFrom = binding.degUnit1
         spinnerTo = binding.degUnit2
@@ -60,7 +61,6 @@ class TempFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
@@ -78,17 +78,17 @@ class TempFragment : Fragment() {
         }
 
         // Set default selected TextView
-        selectedTextView = celsiusTv
+        selectedTextView = tempType1
 
         // Highlight the selected TextView
         highlightSelectedTextView()
 
         // Set OnClickListener for TextViews
-        celsiusTv.setOnClickListener {
+        tempType1.setOnClickListener {
             selectedTextView = binding.celciusTv
             highlightSelectedTextView()
         }
-        farhnTv.setOnClickListener {
+        tempType2.setOnClickListener {
             selectedTextView = binding.farhTv
             highlightSelectedTextView()
         }
@@ -102,9 +102,8 @@ class TempFragment : Fragment() {
 
             // Check if text is empty or null and set it to "0"
             if (currentText.isEmpty()) {
-                selectedTextView.text = "0"
+                selectedTextView.text = ""
             } else {
-                // Otherwise, remove the last character
                 val removedLast = currentText.dropLast(1)
                 selectedTextView.text = removedLast
             }
@@ -115,10 +114,16 @@ class TempFragment : Fragment() {
 
         binding.buttonClear.setOnClickListener {
             selectedTextView.text = ""
+            tempType1.text = ""
+            tempType2.text = ""
             convertTemperature()
         }
 
         setNumberButtonListeners()
+
+        binding.bottom.backBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_tempFragment_to_home_screen)
+        }
 
         return binding.root
     }
@@ -144,34 +149,16 @@ class TempFragment : Fragment() {
     }
 
     private fun highlightSelectedTextView() {
-        celsiusTv.setBackgroundColor(
-            if (selectedTextView == celsiusTv) Color.YELLOW else Color.WHITE
+        val selectedColor = ContextCompat.getColor(requireContext(), R.color.purple_200)
+        val otherText = ContextCompat.getColor(requireContext(), R.color.black)
+        tempType1.setTextColor(
+            if (selectedTextView == tempType1) selectedColor else otherText
         )
-        farhnTv.setBackgroundColor(
-            if (selectedTextView == farhnTv) Color.YELLOW else Color.WHITE
+        tempType2.setTextColor(
+            if (selectedTextView == tempType2) selectedColor else otherText
         )
     }
 
-
-//    private fun convertTemperature() {
-//        val input = selectedTextView.text.toString()
-//
-//        if (input.isNotEmpty()) {
-//            val inputValue = input.toDoubleOrNull()
-//
-//            if (inputValue != null) {
-//                if (selectedTextView == celsiusTv) {
-//                    // Convert Celsius to Fahrenheit
-//                    val fahrenheit = (inputValue * 9 / 5) + 32
-//                    farhnTv.text = fahrenheit.toString()
-//                } else if (selectedTextView == farhnTv) {
-//                    // Convert Fahrenheit to Celsius
-//                    val celsius = (inputValue - 32) * 5 / 9
-//                    celsiusTv.text = celsius.toString()
-//                }
-//            }
-//        }
-//    }
 
     private fun convertTemperature() {
         val input = selectedTextView.text.toString()
@@ -180,12 +167,29 @@ class TempFragment : Fragment() {
             val inputValue = input.toDoubleOrNull()
 
             if (inputValue != null) {
-                val fromUnit = spinnerFrom.selectedItem.toString()
-                val toUnit = spinnerTo.selectedItem.toString()
+//                val fromUnit = spinnerFrom.selectedItem.toString()
+//                val toUnit = spinnerTo.selectedItem.toString()
+//
+//                val convertedValue = convertTemperatureUnits(inputValue, fromUnit, toUnit)
+//                val targetTextView = if (selectedTextView == celsiusTv) farhnTv else celsiusTv
+//                targetTextView.text = String.format("%.2f", convertedValue)
 
-                val convertedValue = convertTemperatureUnits(inputValue, fromUnit, toUnit)
-                val targetTextView = if (selectedTextView == celsiusTv) farhnTv else celsiusTv
-                targetTextView.text = String.format("%.2f", convertedValue)
+                val fromUnit: String
+                val toUnit: String
+                val targetTv: TextView
+
+                if (selectedTextView == tempType1) {
+                    fromUnit = spinnerFrom.selectedItem.toString()
+                    toUnit = spinnerTo.selectedItem.toString()
+                    targetTv = tempType2
+                } else {
+                    fromUnit = spinnerTo.selectedItem.toString()
+                    toUnit = spinnerFrom.selectedItem.toString()
+                    targetTv = tempType1
+                }
+
+                val convertedVal = convertTemperatureUnits(inputValue, fromUnit, toUnit)
+                targetTv.text = String.format("%.2f", convertedVal)
             }
         }
     }

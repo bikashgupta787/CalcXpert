@@ -9,4 +9,12 @@
         <item>Kelvin</item>
         <item>Rankine</item>
     </string-array>
+
+    <string-array name="data_types">
+        <item>Byte</item>
+        <item>Kilobyte</item>
+        <item>Megabyte</item>
+        <item>Gigabyte</item>
+        <item>Terabyte</item>
+    </string-array>
 </resources>
