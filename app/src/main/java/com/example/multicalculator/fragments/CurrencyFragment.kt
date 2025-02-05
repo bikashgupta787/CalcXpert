@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.SharedPrefsManager
 import com.example.multicalculator.databinding.FragmentCurrencyBinding
@@ -33,6 +34,9 @@ class CurrencyFragment : Fragment() {
             }
             .setCancelable(false)
 
+        binding.currencyLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_currency_screen_to_currencyConverter)
+        }
 
         binding.themeBtn.setOnClickListener {
             themeDialog.show()

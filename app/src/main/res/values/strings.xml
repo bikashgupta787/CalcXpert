@@ -17,4 +17,34 @@
         <item>Gigabyte</item>
         <item>Terabyte</item>
     </string-array>
+
+    <string-array name="currency_types">
+        <item>USD</item>
+        <item>INR</item>
+        <item>GBP</item>
+        <item>AED</item>
+        <item>AUD</item>
+    </string-array>
+
+    <string-array name="time_types">
+        <item>Year</item>
+        <item>Months</item>
+        <item>Week</item>
+        <item>Day</item>
+        <item>Hour</item>
+        <item>Minutes</item>
+        <item>Seconds</item>
+    </string-array>
+
+    <string-array name="bmi_height">
+        <item>Centimeters</item>
+        <item>Meters</item>
+        <item>Feet</item>
+        <item>Inches</item>
+    </string-array>
+
+    <string-array name="bmi_weight">
+        <item>Kilograms</item>
+        <item>Pounds</item>
+    </string-array>
 </resources>

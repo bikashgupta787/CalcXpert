@@ -37,6 +37,12 @@
         <action
             android:id="@+id/action_home_screen_to_currencyFragment"
             app:destination="@id/currency_screen" />
+        <action
+            android:id="@+id/action_home_screen_to_timeFragment"
+            app:destination="@id/timeFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_bmiFragment"
+            app:destination="@id/bmiFragment" />
     </fragment>
     <fragment
         android:id="@+id/ageFragment"
@@ -72,6 +78,32 @@
         tools:layout="@layout/fragment_currency" >
         <action
             android:id="@+id/action_currency_screen_to_home_screen"
+            app:destination="@id/home_screen" />
+        <action
+            android:id="@+id/action_currency_screen_to_currencyConverter"
+            app:destination="@id/currencyConverter" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyConverter"
+        android:name="com.example.multicalculator.ui.CurrencyConverter"
+        android:label="fragment_currency_converter"
+        tools:layout="@layout/fragment_currency_converter" />
+    <fragment
+        android:id="@+id/timeFragment"
+        android:name="com.example.multicalculator.fragments.TimeFragment"
+        android:label="fragment_time"
+        tools:layout="@layout/fragment_time" >
+        <action
+            android:id="@+id/action_timeFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/bmiFragment"
+        android:name="com.example.multicalculator.fragments.BmiFragment"
+        android:label="fragment_bmi"
+        tools:layout="@layout/fragment_bmi" >
+        <action
+            android:id="@+id/action_bmiFragment_to_home_screen"
             app:destination="@id/home_screen" />
     </fragment>
 </navigation>

@@ -35,6 +35,14 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_home_screen_to_dataFragment)
         }
 
+        binding.timeLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_timeFragment)
+        }
+
+        binding.bmiLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_bmiFragment)
+        }
+
         return binding.root
     }
 
