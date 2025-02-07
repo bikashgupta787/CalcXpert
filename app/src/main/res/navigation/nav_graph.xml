@@ -43,6 +43,15 @@
         <action
             android:id="@+id/action_home_screen_to_bmiFragment"
             app:destination="@id/bmiFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_discountFragment"
+            app:destination="@id/discountFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_lengthFragment"
+            app:destination="@id/lengthFragment" />
+        <action
+            android:id="@+id/action_home_screen_to_massFragment"
+            app:destination="@id/massFragment" />
     </fragment>
     <fragment
         android:id="@+id/ageFragment"
@@ -104,6 +113,33 @@
         tools:layout="@layout/fragment_bmi" >
         <action
             android:id="@+id/action_bmiFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/discountFragment"
+        android:name="com.example.multicalculator.fragments.DiscountFragment"
+        android:label="fragment_discount"
+        tools:layout="@layout/fragment_discount" >
+        <action
+            android:id="@+id/action_discountFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/lengthFragment"
+        android:name="com.example.multicalculator.fragments.LengthFragment"
+        android:label="fragment_length"
+        tools:layout="@layout/fragment_length" >
+        <action
+            android:id="@+id/action_lengthFragment_to_home_screen"
+            app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/massFragment"
+        android:name="com.example.multicalculator.fragments.MassFragment"
+        android:label="fragment_mass"
+        tools:layout="@layout/fragment_mass" >
+        <action
+            android:id="@+id/action_massFragment_to_home_screen"
             app:destination="@id/home_screen" />
     </fragment>
 </navigation>

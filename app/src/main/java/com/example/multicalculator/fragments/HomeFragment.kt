@@ -43,6 +43,18 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_home_screen_to_bmiFragment)
         }
 
+        binding.discountLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_discountFragment)
+        }
+
+        binding.lengthLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_lengthFragment)
+        }
+
+        binding.massLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_massFragment)
+        }
+
         return binding.root
     }
 

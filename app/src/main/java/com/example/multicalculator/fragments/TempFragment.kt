@@ -167,13 +167,6 @@ class TempFragment : Fragment() {
             val inputValue = input.toDoubleOrNull()
 
             if (inputValue != null) {
-//                val fromUnit = spinnerFrom.selectedItem.toString()
-//                val toUnit = spinnerTo.selectedItem.toString()
-//
-//                val convertedValue = convertTemperatureUnits(inputValue, fromUnit, toUnit)
-//                val targetTextView = if (selectedTextView == celsiusTv) farhnTv else celsiusTv
-//                targetTextView.text = String.format("%.2f", convertedValue)
-
                 val fromUnit: String
                 val toUnit: String
                 val targetTv: TextView

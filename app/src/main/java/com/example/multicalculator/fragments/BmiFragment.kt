@@ -1,5 +1,10 @@
 package com.example.multicalculator.fragments
 
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,13 +15,17 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TableLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.databinding.FragmentBmiBinding
 import com.google.android.material.tabs.TabLayout
+import java.io.File
+import java.io.FileOutputStream
 
 
 class BmiFragment : Fragment() {
@@ -29,6 +38,7 @@ class BmiFragment : Fragment() {
     private lateinit var weightVal: TextView
     private lateinit var heightspinner: Spinner
     private lateinit var weightspinner: Spinner
+    private lateinit var shareBtn: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +47,7 @@ class BmiFragment : Fragment() {
         binding.bottom.fragmentHeading.text = "BMI"
         cardView = binding.bmiCardView
         tabLayout = binding.tableLayout
+        shareBtn = binding.shareBtn
 
         heightVal = binding.dataTypeTv2
         weightVal = binding.dataTypeTv1
@@ -63,6 +74,7 @@ class BmiFragment : Fragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 cardView.visibility = View.GONE
                 tabLayout.visibility = View.VISIBLE
+                shareBtn.visibility = View.GONE
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -72,6 +84,7 @@ class BmiFragment : Fragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 cardView.visibility = View.GONE
                 tabLayout.visibility = View.VISIBLE
+                shareBtn.visibility = View.GONE
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -85,6 +98,7 @@ class BmiFragment : Fragment() {
             highlightSelectedTextView()
             cardView.visibility = View.GONE
             tabLayout.visibility = View.VISIBLE
+            shareBtn.visibility = View.GONE
         }
 
         weightVal.setOnClickListener {
@@ -92,12 +106,21 @@ class BmiFragment : Fragment() {
             highlightSelectedTextView()
             cardView.visibility = View.GONE
             tabLayout.visibility = View.VISIBLE
+            shareBtn.visibility = View.GONE
         }
 
         binding.buttonGo.setOnClickListener {
-            cardView.visibility = View.VISIBLE
-            tabLayout.visibility = View.GONE
-            calculateBMI()
+            val weightText = weightVal.text.toString().trim()
+            val heightText = heightVal.text.toString().trim()
+
+            if (weightText.isEmpty() || heightText.isEmpty()) {
+                Toast.makeText(requireContext(), "Please enter values", Toast.LENGTH_SHORT).show()
+            } else {
+                cardView.visibility = View.VISIBLE
+                tabLayout.visibility = View.GONE
+                shareBtn.visibility = View.VISIBLE
+                calculateBMI()
+            }
         }
 
         binding.buttonDot.setOnClickListener {
@@ -123,6 +146,14 @@ class BmiFragment : Fragment() {
 
         binding.bottom.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_bmiFragment_to_home_screen)
+        }
+
+        shareBtn.setOnClickListener {
+            val layout = cardView
+            val bitmap = convertLayoutToImg(layout)
+            val imageUri = saveBitmapToFile(requireContext(), bitmap)
+
+            imageUri?.let { shareImg(it) }
         }
 
         setNUmberButtonListeners()
@@ -216,6 +247,41 @@ class BmiFragment : Fragment() {
 //            binding.bmiType.text = "Overweight"
 //        }
 
+    }
+
+    private fun convertLayoutToImg(layout: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(layout.width, layout.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        layout.draw(canvas)
+        return bitmap
+    }
+
+    private fun saveBitmapToFile(context: Context, bitmap: Bitmap): Uri? {
+        return try {
+            val filesDir =
+                File(context.cacheDir, "images") // Use cacheDir instead of externalCacheDir
+            filesDir.mkdirs() // Ensure directory exists
+
+            val imageFile = File(filesDir, "bmi_result.png")
+            val outputStream = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+            FileProvider.getUriForFile(context, "${context.packageName}.provider", imageFile)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun shareImg(uri: Uri) {
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "image/png"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        startActivity(Intent.createChooser(intent, "Share via"))
     }
 
     override fun onDestroyView() {

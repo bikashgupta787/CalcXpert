@@ -28,12 +28,12 @@
 
     <string-array name="time_types">
         <item>Year</item>
-        <item>Months</item>
+        <item>Month</item>
         <item>Week</item>
         <item>Day</item>
         <item>Hour</item>
-        <item>Minutes</item>
-        <item>Seconds</item>
+        <item>Minute</item>
+        <item>Second</item>
     </string-array>
 
     <string-array name="bmi_height">
@@ -47,4 +47,23 @@
         <item>Kilograms</item>
         <item>Pounds</item>
     </string-array>
+
+    <string-array name="length_types">
+        <item>Kilometer</item>
+        <item>Meter</item>
+        <item>Centimeter</item>
+        <item>Decimeter</item>
+        <item>Millimeter</item>
+        <item>Micrometer</item>
+    </string-array>
+
+    <string-array name="mass_types">
+        <item>Tonne</item>
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Milligram</item>
+        <item>Microgram</item>
+        <item>Quintal</item>
+    </string-array>
+
 </resources>

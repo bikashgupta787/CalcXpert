@@ -59,6 +59,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataTypeTv1" />
 
+    <TextView
+        android:id="@+id/shareBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Share"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bmiCardView"
         android:layout_width="match_parent"
@@ -79,26 +94,27 @@
             android:text="15.6"
             android:textSize="52sp"
             app:layout_constraintBottom_toTopOf="@+id/viewLine"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/bmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:text="BMI"
             android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/bmiType"
-            app:layout_constraintEnd_toEndOf="@+id/bmiType"
-            app:layout_constraintStart_toStartOf="@+id/bmiType" />
+            app:layout_constraintStart_toStartOf="@+id/bmiType"
+            app:layout_constraintTop_toTopOf="@+id/bmiTv" />
 
         <TextView
             android:id="@+id/bmiType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Underweight"
             android:layout_marginStart="10dp"
-            android:textSize="22sp"
+            android:text="Underweight"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bmiTv"
             app:layout_constraintStart_toEndOf="@+id/bmiTv"
             app:layout_constraintTop_toBottomOf="@+id/bmi" />
 
