@@ -32,10 +32,12 @@ class LengthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLengthBinding.inflate(inflater, container, false)
-        binding.bottom.fragmentHeading.text = "Length"
+        binding.bottom.fragmentHeading.text = "Length converter"
 
         lengthType1 = binding.lengthTv1
         lengthType2 = binding.lengthTv2
+
+        lengthType1.text = "1"
 
         spinnerFrom = binding.degUnit1
         spinnerTo = binding.degUnit2
@@ -71,8 +73,8 @@ class LengthFragment : Fragment() {
         }
 
         selectedTextView = lengthType1
-
         highlightSelectedTextView()
+        convertLength()
 
         lengthType1.setOnClickListener {
             selectedTextView = lengthType1
@@ -90,8 +92,10 @@ class LengthFragment : Fragment() {
 
         binding.buttonCroxx.setOnClickListener {
             val currentText = selectedTextView.text.toString()
-            if (currentText.isEmpty()) {
+            if (currentText.isEmpty() || currentText == "0") {
                 selectedTextView.text = ""
+                val otherTv = if (selectedTextView == lengthType1) lengthType2 else lengthType1
+                otherTv.text = ""
             } else {
                 val removedLast = currentText.dropLast(1)
                 selectedTextView.text = removedLast
@@ -168,7 +172,13 @@ class LengthFragment : Fragment() {
                 }
 
                 val convertedVal = convertLengthUnits(inputValue, fromUnit, toUnit)
-                targetTv.text = String.format("%.2f", convertedVal)
+                val formattedValue = if (convertedVal % 1 == 0.0) {
+                    convertedVal.toInt().toString()
+                } else {
+                    String.format("%.2f", convertedVal)
+                }
+
+                targetTv.text = formattedValue
             }
         }
     }

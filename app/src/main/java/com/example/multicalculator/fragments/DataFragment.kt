@@ -30,10 +30,12 @@ class DataFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDataBinding.inflate(inflater, container, false)
-        binding.bottom.fragmentHeading.text = "Data"
+        binding.bottom.fragmentHeading.text = "Data converter"
 
         dataType1Tv = binding.dataTypeTv1
         dataType2Tv = binding.dataTypeTv2
+
+        dataType1Tv.text = "1"
 
         dataFrom = binding.dataTypeUnit1
         dataTo = binding.dataTypeUnit2
@@ -49,8 +51,9 @@ class DataFragment : Fragment() {
         dataFrom.adapter = adapter
         dataTo.adapter = adapter
 
-        dataFrom.setSelection(0) //b
+        dataFrom.setSelection(2) //b
         dataTo.setSelection(1)  //mb
+
 
         dataFrom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -73,6 +76,8 @@ class DataFragment : Fragment() {
 
         highlightSelectedTv()
 
+        convertDataType()
+
         //setupTextWatchers()
 
         dataType1Tv.setOnClickListener {
@@ -92,13 +97,16 @@ class DataFragment : Fragment() {
         binding.buttonCroxx.setOnClickListener {
             val currentText = selectedTv.text.toString()
 
-            if (currentText.isEmpty()) {
+            if (currentText.isEmpty() || currentText == "0") {
                 selectedTv.text = ""
+                val otherTv = if (selectedTv == dataType1Tv) dataType2Tv else dataType1Tv
+                otherTv.text = ""
             } else {
                 val removeLast = currentText.dropLast(1)
                 selectedTv.text = removeLast
+                convertDataType()
             }
-            convertDataType()
+
         }
 
         binding.buttonClear.setOnClickListener {
@@ -157,12 +165,6 @@ class DataFragment : Fragment() {
             val inputValue = input.toDoubleOrNull()
 
             if (inputValue != null) {
-//                val fromUnit = dataFrom.selectedItem.toString()
-//                val toUnit = dataTo.selectedItem.toString()
-//
-//                val convertedVal = convertDataUnits(inputValue, fromUnit, toUnit)
-//                val targetedTextView = if (selectedTv == dataType1Tv) dataType2Tv else dataType1Tv
-//                targetedTextView.text = String.format("%.2f", convertedVal)
 
                 val fromUnit: String
                 val toUnit: String
@@ -179,18 +181,17 @@ class DataFragment : Fragment() {
                 }
 
                 val convertedVal = convertDataUnits(inputValue, fromUnit, toUnit)
-                targetTv.text = String.format("%.2f", convertedVal)
+                val formattedValue = if (convertedVal % 1 == 0.0){
+                    convertedVal.toInt().toString()
+                } else {
+                    String.format("%.2f", convertedVal)
+                }
+
+                targetTv.text = formattedValue
             }
         }
     }
 
-//    private fun convertDataUnits(value: Double, fromUnit: String, toUnit: String): Double {
-//        return when (fromUnit to toUnit) {
-//            "Byte" to "Kilobyte" -> (value / 1024.0)
-//            "Kilobyte" to "Byte" -> (value * 1024.0)
-//            else -> value
-//        }
-//    }
 
     private fun convertDataUnits(value: Double, fromUnit: String, toUnit: String): Double {
         val conversionMap = mapOf(

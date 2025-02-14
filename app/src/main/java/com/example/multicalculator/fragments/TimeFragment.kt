@@ -30,10 +30,12 @@ class TimeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTimeBinding.inflate(inflater, container, false)
-        binding.bottom.fragmentHeading.text = "Time"
+        binding.bottom.fragmentHeading.text = "Time converter"
 
         timeType1 = binding.dataTypeTv1
         timeType2 = binding.dataTypeTv2
+
+        timeType1.text = "1"
 
         spinnerType1 = binding.dataTypeUnit1
         spinnerType2 = binding.dataTypeUnit2
@@ -69,6 +71,7 @@ class TimeFragment : Fragment() {
 
         selectedTextView = timeType1
         highlightSelectedTextView()
+        convertTime()
 
         timeType1.setOnClickListener {
             selectedTextView = timeType1
@@ -86,9 +89,10 @@ class TimeFragment : Fragment() {
 
         binding.buttonCroxx.setOnClickListener {
             val currentText = selectedTextView.text.toString()
-
-            if (currentText.isEmpty()) {
+            if (currentText.isEmpty() || currentText == "0") {
                 selectedTextView.text = ""
+                val otherTv = if (selectedTextView == timeType1) timeType2 else timeType1
+                otherTv.text = ""
             } else {
                 val removedLast = currentText.dropLast(1)
                 selectedTextView.text = removedLast
@@ -170,12 +174,18 @@ class TimeFragment : Fragment() {
                 }
 
                 val convertedValue = convertTimeUnits(inputValue, fromUnit, toUnit)
-                targetTv.text = String.format("%.2f", convertedValue)
+                val formattedValue = if (convertedValue % 1 == 0.0){
+                    convertedValue.toInt().toString()
+                } else {
+                    String.format("%.2f", convertedValue)
+                }
+
+                targetTv.text = formattedValue
             }
         }
     }
 
-    private fun convertTimeUnits(value: Double, fromUnit: String, toUnit: String): Any? {
+    private fun convertTimeUnits(value: Double, fromUnit: String, toUnit: String): Double {
         val secondsInUnit = mapOf(
             "Year" to 31536000.0,
             "Month" to 2628000.0,  // Approximate (30.44 days per month)

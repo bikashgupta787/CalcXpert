@@ -52,6 +52,9 @@ class BmiFragment : Fragment() {
         heightVal = binding.dataTypeTv2
         weightVal = binding.dataTypeTv1
 
+        heightVal.text = "160"
+        weightVal.text = "70"
+
         heightspinner = binding.heightType
         weightspinner = binding.weightType
 

@@ -10,9 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
-        android:rowCount="3"
-        android:padding="16dp"
-        android:layout_margin="8dp">
+        android:rowCount="3">
 
         <!-- Single Item -->
         <LinearLayout
@@ -21,8 +19,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -44,9 +44,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:background="@drawable/age_bg"
             android:orientation="vertical"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -69,8 +71,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="@drawable/age_bg"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -82,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Temperature"
+                android:text="Temp"
                 android:textSize="14sp"
                 android:gravity="center" />
         </LinearLayout>
@@ -94,8 +98,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -118,8 +124,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -142,8 +150,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -166,8 +176,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"
@@ -190,8 +202,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="48dp"

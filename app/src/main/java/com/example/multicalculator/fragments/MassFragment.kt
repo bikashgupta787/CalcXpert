@@ -31,10 +31,13 @@ class MassFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMassBinding.inflate(inflater,container,false)
-        binding.bottom.fragmentHeading.text = "Mass"
+        binding.bottom.fragmentHeading.text = "Mass converter"
 
         massType1 = binding.massTv1
         massType2 = binding.massTv2
+
+        massType1.text = "1"
+
         spinnerFrom = binding.degUnit1
         spinnerTo = binding.degUnit2
 
@@ -72,6 +75,8 @@ class MassFragment : Fragment() {
         selectedTextView = massType1
         highlightSelectedTextView()
 
+        convertMass()
+
         massType1.setOnClickListener {
             selectedTextView = massType1
             highlightSelectedTextView()
@@ -88,8 +93,10 @@ class MassFragment : Fragment() {
 
         binding.buttonCroxx.setOnClickListener {
             val currentText = selectedTextView.text.toString()
-            if (currentText.isEmpty()){
+            if (currentText.isEmpty() || currentText == "0") {
                 selectedTextView.text = ""
+                val otherTv = if (selectedTextView == massType1) massType2 else massType1
+                otherTv.text = ""
             } else {
                 val removedLast = currentText.dropLast(1)
                 selectedTextView.text = removedLast
@@ -164,7 +171,12 @@ class MassFragment : Fragment() {
                 }
 
                 val convertedVal = convertMassUnits(inputValue, fromUnit, toUnit)
-                targetTv.text = String.format("%.2f", convertedVal)
+                val formattedValue = if (convertedVal % 1 == 0.0) {
+                    convertedVal.toInt().toString()
+                } else {
+                    String.format("%.2f", convertedVal)
+                }
+                targetTv.text = formattedValue
             }
         }
     }

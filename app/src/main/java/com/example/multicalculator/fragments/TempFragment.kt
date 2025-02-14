@@ -30,10 +30,12 @@ class TempFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTempBinding.inflate(inflater, container, false)
-        binding.bottom.fragmentHeading.text = "Temperature"
+        binding.bottom.fragmentHeading.text = "Temperature converter"
 
         tempType1 = binding.celciusTv
         tempType2 = binding.farhTv
+
+        tempType1.text = "38"
 
         spinnerFrom = binding.degUnit1
         spinnerTo = binding.degUnit2
@@ -83,6 +85,8 @@ class TempFragment : Fragment() {
         // Highlight the selected TextView
         highlightSelectedTextView()
 
+        convertTemperature()
+
         // Set OnClickListener for TextViews
         tempType1.setOnClickListener {
             selectedTextView = binding.celciusTv
@@ -101,8 +105,10 @@ class TempFragment : Fragment() {
             val currentText = selectedTextView.text.toString()
 
             // Check if text is empty or null and set it to "0"
-            if (currentText.isEmpty()) {
+            if (currentText.isEmpty() || currentText == "0") {
                 selectedTextView.text = ""
+                val otherTv = if (selectedTextView == tempType1) tempType2 else tempType1
+                otherTv.text = ""
             } else {
                 val removedLast = currentText.dropLast(1)
                 selectedTextView.text = removedLast
@@ -182,7 +188,13 @@ class TempFragment : Fragment() {
                 }
 
                 val convertedVal = convertTemperatureUnits(inputValue, fromUnit, toUnit)
-                targetTv.text = String.format("%.2f", convertedVal)
+                val formattedValue = if (convertedVal % 1 == 0.0){
+                    convertedVal.toInt().toString()
+                } else {
+                    String.format("%.2f", convertedVal)
+                }
+
+                targetTv.text = formattedValue
             }
         }
     }

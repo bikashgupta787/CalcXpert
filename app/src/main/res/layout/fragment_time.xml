@@ -25,15 +25,17 @@
 
     <TextView
         android:id="@+id/dataTypeTv1"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
+        android:layout_marginEnd="50dp"
+        android:gravity="end"
         android:hint="0"
         android:maxLength="8"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dataTypeUnit1"
         app:layout_constraintTop_toBottomOf="@+id/bottom" />
 
     <Spinner
@@ -48,16 +50,18 @@
 
     <TextView
         android:id="@+id/dataTypeTv2"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp"
+        android:gravity="end"
         android:hint="0"
-        android:gravity="center"
         android:maxLength="8"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataTypeTv1" />
+        app:layout_constraintStart_toEndOf="@+id/dataTypeUnit2"
+        app:layout_constraintTop_toBottomOf="@+id/dataTypeUnit1" />
 
 
     <TableLayout
@@ -165,6 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:text="+/-"
+                android:visibility="gone"
                 android:textColor="@color/green" />
 
         </TableRow>

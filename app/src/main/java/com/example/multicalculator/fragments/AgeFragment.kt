@@ -44,7 +44,7 @@ class AgeFragment : Fragment() {
     ): View? {
         binding = FragmentAgeBinding.inflate(inflater, container, false)
 
-        binding.bottom.fragmentHeading.text = "Age"
+        binding.bottom.fragmentHeading.text = "Age converter"
 
         selectedTextView = binding.dobText
 

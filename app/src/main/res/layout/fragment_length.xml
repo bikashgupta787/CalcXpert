@@ -9,6 +9,7 @@
     <include
         android:id="@+id/bottom"
         layout="@layout/top_bar"
+        style="@style/fragment_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,11 +26,11 @@
 
     <TextView
         android:id="@+id/lengthTv1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
+        android:layout_marginEnd="50dp"
+        android:gravity="end"
         android:hint="0"
         android:maxLength="8"
         android:textSize="22sp"
@@ -50,18 +51,18 @@
 
     <TextView
         android:id="@+id/lengthTv2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
+        android:gravity="end"
         android:hint="0"
         android:maxLength="8"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/degUnit2"
-        app:layout_constraintTop_toBottomOf="@+id/lengthTv1" />
+        app:layout_constraintTop_toBottomOf="@+id/degUnit1" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -167,6 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:text="+/-"
+                android:visibility="gone"
                 android:textColor="@color/green" />
 
         </TableRow>

@@ -33,13 +33,17 @@ class DiscountFragment : Fragment() {
         discount = binding.discountPriceTv
         finalPrice = binding.finalPriceTv
 
+        originalPrice.text = "100"
+        discount.text = "10"
+
         selectedTextView = originalPrice
         highlightSelectedTextView()
+        calculateDiscountPrice()
 
-        discount.filters = arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
-            val input = (dest.toString() + source.toString()).toIntOrNull() ?: return@InputFilter ""
-            if (input in 0..99) source else ""
-        })
+//        discount.filters = arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+//            val input = (dest.toString() + source.toString()).toIntOrNull() ?: return@InputFilter ""
+//            if (input in 0..99) source else ""
+//        })
 
 
         originalPrice.setOnClickListener {
@@ -74,6 +78,7 @@ class DiscountFragment : Fragment() {
             originalPrice.text = ""
             discount.text = ""
             finalPrice.text = ""
+            binding.savedTv.text = ""
         }
 
         setNumberButonListeners()
@@ -128,8 +133,22 @@ class DiscountFragment : Fragment() {
         val disountAmount = (originalPriceText * discountPrice) / 100
         val finalPrice = originalPriceText - disountAmount
         val savedPrice = originalPriceText - finalPrice
-        binding.finalPriceTv.text = String.format("%.2f",finalPrice)
-        binding.savedTv.text = "You Saved " + String.format("%.2f", savedPrice)
+
+        val formattedValue = if (finalPrice % 1 == 0.0) {
+            finalPrice.toInt().toString()
+        } else {
+            String.format("%.2f", finalPrice)
+        }
+
+        binding.finalPriceTv.text = formattedValue
+
+        val formattedValue2 = if (savedPrice % 1 == 0.0) {
+            savedPrice.toInt().toString()
+        } else {
+            String.format("%.2f", savedPrice)
+        }
+
+        binding.savedTv.text = "You Saved " + formattedValue2
     }
     override fun onDestroyView() {
         super.onDestroyView()
