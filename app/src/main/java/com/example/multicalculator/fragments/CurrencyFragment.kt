@@ -14,35 +14,42 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class CurrencyFragment : Fragment() {
-    private lateinit var binding : FragmentCurrencyBinding
-    private val themeTitleList = arrayOf("Light","Dark","Auto")
+    private lateinit var binding: FragmentCurrencyBinding
+    private val themeTitleList = arrayOf("Light", "Dark", "Auto")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCurrencyBinding.inflate(inflater,container,false)
-        val sharedPrefsManager = SharedPrefsManager(requireContext())
-        var checkedTheme = sharedPrefsManager.theme
-
-        val themeDialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Theme")
-            .setPositiveButton("Ok"){_,_ ->
-                AppCompatDelegate.setDefaultNightMode(sharedPrefsManager.themeFlag[checkedTheme])
-            }
-            .setSingleChoiceItems(themeTitleList,checkedTheme){_, which ->
-                checkedTheme = which
-            }
-            .setCancelable(false)
+        binding = FragmentCurrencyBinding.inflate(inflater, container, false)
 
         binding.currencyLayout.setOnClickListener {
             findNavController().navigate(R.id.action_currency_screen_to_currencyConverter)
         }
 
-        binding.themeBtn.setOnClickListener {
-            themeDialog.show()
+        binding.investment.setOnClickListener {
+            findNavController().navigate(R.id.action_currency_screen_to_investmentFragment)
         }
 
-        return  binding.root
+        binding.loan.setOnClickListener {
+            findNavController().navigate(R.id.action_currency_screen_to_loanFragment)
+        }
+
+
+//        val sharedPrefsManager = SharedPrefsManager(requireContext())
+//        var checkedTheme = sharedPrefsManager.theme
+//
+//        val themeDialog = MaterialAlertDialogBuilder(requireContext())
+//            .setTitle("Theme")
+//            .setPositiveButton("Ok"){_,_ ->
+//                AppCompatDelegate.setDefaultNightMode(sharedPrefsManager.themeFlag[checkedTheme])
+//            }
+//            .setSingleChoiceItems(themeTitleList,checkedTheme){_, which ->
+//                checkedTheme = which
+//            }
+//            .setCancelable(false)
+
+
+        return binding.root
     }
 
 }

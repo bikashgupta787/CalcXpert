@@ -91,12 +91,22 @@
         <action
             android:id="@+id/action_currency_screen_to_currencyConverter"
             app:destination="@id/currencyConverter" />
+        <action
+            android:id="@+id/action_currency_screen_to_loanFragment"
+            app:destination="@id/loanFragment" />
+        <action
+            android:id="@+id/action_currency_screen_to_investmentFragment"
+            app:destination="@id/investmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/currencyConverter"
         android:name="com.example.multicalculator.ui.CurrencyConverter"
         android:label="fragment_currency_converter"
-        tools:layout="@layout/fragment_currency_converter" />
+        tools:layout="@layout/fragment_currency_converter" >
+        <action
+            android:id="@+id/action_currencyConverter_to_currency_screen"
+            app:destination="@id/currency_screen" />
+    </fragment>
     <fragment
         android:id="@+id/timeFragment"
         android:name="com.example.multicalculator.fragments.TimeFragment"
@@ -141,5 +151,23 @@
         <action
             android:id="@+id/action_massFragment_to_home_screen"
             app:destination="@id/home_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/investmentFragment"
+        android:name="com.example.multicalculator.fragments.InvestmentFragment"
+        android:label="fragment_investment"
+        tools:layout="@layout/fragment_investment" >
+        <action
+            android:id="@+id/action_investmentFragment_to_currency_screen"
+            app:destination="@id/currency_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/loanFragment"
+        android:name="com.example.multicalculator.fragments.LoanFragment"
+        android:label="fragment_loan"
+        tools:layout="@layout/fragment_loan" >
+        <action
+            android:id="@+id/action_loanFragment_to_currency_screen2"
+            app:destination="@id/currency_screen" />
     </fragment>
 </navigation>

@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.CurrencyFragment">
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3">
+
 
     <LinearLayout
         android:id="@+id/currencyLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
-        android:gravity="center"
         android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@drawable/age_bg"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:contentDescription="Icon"
-            android:src="@drawable/age_icon" />
+            android:src="@drawable/currencies" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,16 +38,69 @@
             android:textSize="14sp" />
     </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/investment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="10dp">
 
-    <Button
-        android:id="@+id/themeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Theme"
-        android:textColor="@color/purple_200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Icon"
+                android:src="@drawable/invest" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Investment"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/loan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:background="@drawable/age_bg"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Icon"
+                android:src="@drawable/loan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Loan"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </GridLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/themeBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Change Theme"-->
+<!--        android:visibility="gone"-->
+<!--        android:textColor="@color/purple_200"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+</ScrollView>

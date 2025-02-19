@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.databinding.FragmentCurrencyConverterBinding
 import com.example.multicalculator.service.RetrofitClient
@@ -26,12 +27,14 @@ class CurrencyConverter : Fragment() {
     private lateinit var currency1: Spinner
     private lateinit var currency2: Spinner
     private lateinit var amountTv: TextView
-    private lateinit var quantityTv: EditText
+    private lateinit var quantityTv: TextView
+    private lateinit var selectedTextView: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
        binding = FragmentCurrencyConverterBinding.inflate(inflater,container,false)
+        binding.bottom.fragmentHeading.text = "Currency converter"
 
         currency1 = binding.spinner1
         currency2 = binding.spinner2
@@ -52,7 +55,28 @@ class CurrencyConverter : Fragment() {
         currency1.setSelection(0)
         currency2.setSelection(1)
 
-        binding.convertBtn.setOnClickListener {
+        quantityTv.setOnClickListener {
+            selectedTextView = quantityTv
+        }
+
+        binding.buttonDot.setOnClickListener {
+            selectedTextView.text = addToInputText(".")
+        }
+
+        binding.buttonCroxx.setOnClickListener {
+            val currentText = selectedTextView.text.toString()
+
+            if (currentText.isEmpty() || currentText == "0") {
+                selectedTextView.text = ""
+                val otherTv = if (selectedTextView == quantityTv) amountTv else quantityTv
+                otherTv.text = ""
+            } else {
+                val removedLast = currentText.dropLast(1)
+                selectedTextView.text = removedLast
+            }
+        }
+
+        binding.buttonGo.setOnClickListener {
             val fromCurrency = currency1.selectedItem.toString()
             val toCurrency = currency2.selectedItem.toString()
             val quantity = quantityTv.text.toString().toDoubleOrNull()
@@ -64,7 +88,38 @@ class CurrencyConverter : Fragment() {
             }
         }
 
+        binding.buttonClear.setOnClickListener {
+            selectedTextView.text = ""
+            amountTv.text = ""
+            quantityTv.text = ""
+        }
+
+        binding.bottom.backBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_currencyConverter_to_currency_screen)
+        }
+
+        setNumberButtonListeners()
+
         return binding.root
+    }
+
+    private fun addToInputText(buttonValue: String): String {
+        return selectedTextView.text.toString() + "" + buttonValue
+    }
+
+    private fun setNumberButtonListeners() {
+        val numberButtons = listOf(
+            binding.button0, binding.button1, binding.button2, binding.button3,
+            binding.button4, binding.button5, binding.button6,
+            binding.button7, binding.button8, binding.button9
+        )
+
+        numberButtons.forEach { button ->
+            button.setOnClickListener {
+                val number = button.text.toString()
+                selectedTextView.text = selectedTextView.text.toString() + number
+            }
+        }
     }
 
     private fun convertCurrency(from: String, to: String, quantity: Double, onResult: (Double) -> Unit) {

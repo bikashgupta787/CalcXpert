@@ -29,6 +29,7 @@ import java.io.FileOutputStream
 
 
 class BmiFragment : Fragment() {
+
     private var _binding: FragmentBmiBinding? = null
     private val binding get() = _binding!!
     private lateinit var cardView: ConstraintLayout
