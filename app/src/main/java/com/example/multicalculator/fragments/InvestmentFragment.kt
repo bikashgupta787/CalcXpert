@@ -5,56 +5,78 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.multicalculator.R
+import com.example.multicalculator.databinding.FragmentInvestmentBinding
+import com.example.multicalculator.databinding.FragmentLoanBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InvestmentFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InvestmentFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentInvestmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_investment, container, false)
+        binding = FragmentInvestmentBinding.inflate(inflater, container, false)
+        binding.bottom.fragmentHeading.text = "Investment Calculator"
+        binding.buttonCal.setOnClickListener {
+            calculateInvestment()
+        }
+
+        binding.totalInvestmentAmt.setOnClickListener {
+            binding.bmiCardView.visibility = View.GONE
+            binding.buttonCal.visibility = View.VISIBLE
+        }
+
+        binding.interestRate.setOnClickListener {
+            binding.bmiCardView.visibility = View.GONE
+            binding.buttonCal.visibility = View.VISIBLE
+        }
+
+        binding.duration.setOnClickListener {
+            binding.bmiCardView.visibility = View.GONE
+            binding.buttonCal.visibility = View.VISIBLE
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InvestmentFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InvestmentFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun calculateInvestment() {
+        val principal = binding.totalInvestmentAmt.text.toString().toDoubleOrNull()
+        val annualRate = binding.interestRate.text.toString().toDoubleOrNull()
+        val durationYears = binding.duration.text.toString().toDoubleOrNull()
+
+        if (principal == null || annualRate == null || durationYears == null || durationYears == 0.0) {
+            Toast.makeText(requireContext(), "Please enter valid value", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val rate = annualRate / 100
+        val selectType = binding.radioGroup.checkedRadioButtonId
+
+        var maturityAmt = 0.0
+        var totalInterest = 0.0
+
+        if (selectType == R.id.oneTime) {
+            maturityAmt = principal * Math.pow(1 + rate, durationYears)
+            totalInterest = maturityAmt - principal
+        } else if (selectType == R.id.recurring) {
+            val months = durationYears * 12
+            val monthlyRate = rate / 12
+            maturityAmt = principal * ((Math.pow(
+                1 + monthlyRate,
+                months
+            ) - 1) / monthlyRate) * (1 + monthlyRate)
+            totalInterest = maturityAmt - (principal * months)
+        }
+
+        binding.bmiCardView.visibility = View.VISIBLE
+        binding.buttonCal.visibility = View.GONE
+        binding.totalVal.text = "Rs. ${String.format("%.2f", maturityAmt)}"
+        binding.totalInterestVal.text = "Rs. ${String.format("%.2f", totalInterest)}"
+        binding.totalInvestVal.text = "Rs. " + principal.toString()
+        binding.durationView.text = durationYears.toString() + " years"
     }
+
+
 }
