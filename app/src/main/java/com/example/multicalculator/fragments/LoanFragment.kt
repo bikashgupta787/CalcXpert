@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.multicalculator.R
 import com.example.multicalculator.databinding.FragmentLoanBinding
 import kotlin.time.times
@@ -37,6 +38,11 @@ class LoanFragment : Fragment() {
             binding.bmiCardView.visibility = View.GONE
             binding.buttonCalculate.visibility = View.VISIBLE
         }
+
+        binding.bottom.backBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_loanFragment_to_currency_screen2)
+        }
+
         return binding.root
     }
 
