@@ -1,26 +1,7 @@
-# SmartCalc 🧮
+# CalcXpert 🧮
 
-A production-grade, all-in-one calculator Android app built with the latest Android tech stack. SmartCalc bundles everyday calculation and conversion tools into a single clean, fast, and beautiful app.
+A production-grade, all-in-one calculator Android app built with the latest Android tech stack. CalcXpert bundles everyday calculation and conversion tools into a single clean, fast, and beautiful app.
 
----
-
-## 📸 Screenshots
-
-> _Add your screenshots here once the app is built_
-
-| Home | Basic Calculator | Date Calculator |
-|------|-----------------|-----------------|
-| ![Home](screenshots/home.png) | ![Calc](screenshots/calculator.png) | ![Date](screenshots/date.png) |
-
-| Unit Converter | Temperature | BMI Calculator |
-|----------------|-------------|----------------|
-| ![Unit](screenshots/unit.png) | ![Temp](screenshots/temperature.png) | ![BMI](screenshots/bmi.png) |
-
-| Discount Calculator | Loan Calculator |
-|---------------------|-----------------|
-| ![Discount](screenshots/discount.png) | ![Loan](screenshots/loan.png) |
-
----
 
 ## ✨ Features
 
@@ -147,8 +128,8 @@ app/src/main/java/com/smartcalc/
 ### Clone & Run
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/SmartCalc.git
-cd SmartCalc
+git clone https://github.com/bikashgupta787/CalcXpert.git
+cd CalcXpert
 ```
 
 Open the project in Android Studio and let Gradle sync. Once sync is complete, run the app on an emulator or physical device.
@@ -219,7 +200,7 @@ Pull requests are welcome. For major changes please open an issue first to discu
 ```
 MIT License
 
-Copyright (c) 2025 SmartCalc
+Copyright (c) 2025 CalcXpert
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
